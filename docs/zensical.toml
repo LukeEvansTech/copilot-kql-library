@@ -1,0 +1,64 @@
+# Zensical Configuration — copilot-kql-library
+# https://zensical.org/docs/
+
+[project]
+site_name = "copilot-kql-library"
+site_description = "Curated KQL queries for auditing, hunting, and reporting on Microsoft 365 Copilot"
+site_author = "Luke Evans"
+site_url = "https://LukeEvansTech.github.io/copilot-kql-library/"
+copyright = "Copyright © 2026 Luke Evans"
+
+docs_dir = "docs"
+site_dir = "site"
+use_directory_urls = true
+dev_addr = "localhost:8000"
+
+[project.theme]
+name = "material"
+variant = "modern"
+language = "en"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "blue"
+accent = "light-blue"
+toggle_icon = "material/brightness-7"
+toggle_name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+primary = "blue"
+accent = "light-blue"
+toggle_icon = "material/brightness-4"
+toggle_name = "Switch to light mode"
+
+[project.theme.icon]
+repo = "fontawesome/brands/github"
+
+repo_url = "https://github.com/LukeEvansTech/copilot-kql-library/"
+repo_name = "LukeEvansTech/copilot-kql-library"
+edit_uri = "edit/main/docs/docs"
+
+[[nav]]
+Home = "index.md"
+
+[[nav]]
+"Audit queries" = [
+  { "Copilot prompts and responses" = "audit/copilot-prompts-and-responses.md" }
+]
+
+[[nav]]
+"Hunting queries" = [
+  { "High-frequency Copilot users" = "hunting/high-frequency-copilot-users.md" }
+]
+
+[[nav]]
+"Grounding queries" = [
+  { "Copilot accessed files" = "grounding/copilot-accessed-files.md" }
+]
+
+[markdown_extensions]
+admonition = {}
+toc = { permalink = true }
