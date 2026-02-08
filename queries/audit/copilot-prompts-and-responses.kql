@@ -1,0 +1,27 @@
+// copilot-prompts-and-responses.kql
+// Source: Microsoft Purview Unified Audit Log (CopilotInteraction record type)
+// Purpose: Surfaces every Microsoft 365 Copilot prompt and response captured in the unified audit
+//          log within the time window. Useful for compliance review, eDiscovery, and incident
+//          response.
+// Licence: Microsoft Purview Audit (Standard) is sufficient for the last 180 days; Purview Audit
+//          (Premium) extends retention to 1 year and adds long-term retention add-ons.
+// Run from: https://compliance.microsoft.com/auditlogsearch (paste into the search field).
+
+AuditLogs
+| where TimeGenerated > ago(7d)
+| where OperationName == "CopilotInteraction"
+| extend AppHost          = tostring(AdditionalDetails.AppHost)
+| extend AppContext       = tostring(AdditionalDetails.AppContext)
+| extend Prompt           = tostring(AdditionalDetails.Prompt)
+| extend Response         = tostring(AdditionalDetails.Response)
+| extend AccessedResources = AdditionalDetails.AccessedResources
+| project
+    TimeGenerated,
+    UserPrincipalName = InitiatedBy.user.userPrincipalName,
+    AppHost,
+    AppContext,
+    Prompt,
+    Response,
+    AccessedResourceCount = array_length(AccessedResources),
+    CorrelationId
+| order by TimeGenerated desc
