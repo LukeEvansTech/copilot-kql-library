@@ -1,0 +1,32 @@
+// copilot-accessed-files.kql
+// Source: Microsoft Purview Unified Audit Log (CopilotInteraction record type)
+// Purpose: Lists every SharePoint/OneDrive file Copilot grounded on, by user, in the last 7 days.
+//          Critical for oversharing analysis: if Copilot can see it, anyone Copilot answers to
+//          can see it via Copilot.
+// Run from: https://compliance.microsoft.com/auditlogsearch
+
+AuditLogs
+| where TimeGenerated > ago(7d)
+| where OperationName == "CopilotInteraction"
+| extend AccessedResources = AdditionalDetails.AccessedResources
+| mv-expand AccessedResources
+| extend
+    ResourceType   = tostring(AccessedResources.Type),
+    ResourceUrl    = tostring(AccessedResources.Url),
+    ResourceName   = tostring(AccessedResources.Name),
+    SensitivityLabelId = tostring(AccessedResources.SensitivityLabelId)
+| where ResourceType in ("SPOFile", "OneDriveFile", "Email", "TeamsMessage")
+| project
+    TimeGenerated,
+    UserPrincipalName = tostring(InitiatedBy.user.userPrincipalName),
+    AppHost           = tostring(AdditionalDetails.AppHost),
+    ResourceType,
+    ResourceName,
+    ResourceUrl,
+    SensitivityLabelId
+| summarize
+    AccessCount = count(),
+    DistinctUsers = dcount(UserPrincipalName),
+    LastSeen = max(TimeGenerated)
+    by ResourceType, ResourceName, ResourceUrl, SensitivityLabelId
+| order by AccessCount desc
