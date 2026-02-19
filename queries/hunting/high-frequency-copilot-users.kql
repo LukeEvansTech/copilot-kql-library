@@ -1,0 +1,32 @@
+// high-frequency-copilot-users.kql
+// Source: Microsoft Defender XDR — CloudAppEvents
+// Purpose: Surfaces users with abnormally high Copilot interaction volume vs. their own 30-day
+//          baseline. Useful for catching automation, account compromise, or training-data
+//          scraping disguised as legitimate Copilot use.
+// Run from: https://security.microsoft.com/v2/advanced-hunting
+
+let lookback = 30d;
+let baseline =
+    CloudAppEvents
+    | where Timestamp between (ago(lookback) .. ago(1d))
+    | where Application == "Microsoft 365 Copilot"
+    | summarize
+        BaselineDailyAvg = todouble(count()) / 29.0,
+        BaselineStdev    = stdev(toint(1))
+        by AccountObjectId, AccountUpn = AccountUpn;
+let today =
+    CloudAppEvents
+    | where Timestamp > ago(1d)
+    | where Application == "Microsoft 365 Copilot"
+    | summarize TodayInteractions = count() by AccountObjectId, AccountUpn;
+today
+| join kind=leftouter baseline on AccountObjectId
+| extend BaselineDailyAvg = coalesce(BaselineDailyAvg, 0.0)
+| extend SpikeFactor = iff(BaselineDailyAvg == 0, todouble(TodayInteractions), TodayInteractions / BaselineDailyAvg)
+| where TodayInteractions > 50 and SpikeFactor > 5
+| project
+    AccountUpn,
+    TodayInteractions,
+    BaselineDailyAvg = round(BaselineDailyAvg, 1),
+    SpikeFactor = round(SpikeFactor, 1)
+| order by SpikeFactor desc
