@@ -12,8 +12,8 @@ Browse the navigation on the left. Source files (`.kql`) live in [`queries/`](ht
 
 ## Where to run them
 
-| Category | Portal |
-| -------- | ------ |
-| Audit | [Microsoft Purview audit log search](https://compliance.microsoft.com/auditlogsearch) |
-| Hunting | [Microsoft Defender XDR Advanced Hunting](https://security.microsoft.com/v2/advanced-hunting) |
-| Hunting / Grounding | Microsoft Sentinel (any workspace with the Microsoft 365 connector) |
+| Category            | Portal                                                                                        |
+| ------------------- | --------------------------------------------------------------------------------------------- |
+| Audit               | [Microsoft Purview audit log search](https://compliance.microsoft.com/auditlogsearch)         |
+| Hunting             | [Microsoft Defender XDR Advanced Hunting](https://security.microsoft.com/v2/advanced-hunting) |
+| Hunting / Grounding | Microsoft Sentinel (any workspace with the Microsoft 365 connector)                           |

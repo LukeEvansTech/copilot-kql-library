@@ -12,13 +12,13 @@ You need a complete record of who used Microsoft 365 Copilot, what they asked, w
 
 Microsoft Purview unified audit log, record type `CopilotInteraction`. Each event captures:
 
-| Property | Description |
-| -------- | ----------- |
-| `AppHost` | The Copilot host app: `Word`, `Excel`, `PowerPoint`, `Outlook`, `Teams`, `Copilot`, `Loop`, `OneNote`, `Stream`. |
-| `AppContext` | Where in the app the interaction happened (e.g. `WordApp`, `Chat`, `Compose`). |
-| `Prompt` | The user prompt sent to Copilot. |
-| `Response` | The model response surfaced to the user. |
-| `AccessedResources` | Array of grounding resources Copilot read (files, sites, mails). |
+| Property            | Description                                                                                                      |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `AppHost`           | The Copilot host app: `Word`, `Excel`, `PowerPoint`, `Outlook`, `Teams`, `Copilot`, `Loop`, `OneNote`, `Stream`. |
+| `AppContext`        | Where in the app the interaction happened (e.g. `WordApp`, `Chat`, `Compose`).                                   |
+| `Prompt`            | The user prompt sent to Copilot.                                                                                 |
+| `Response`          | The model response surfaced to the user.                                                                         |
+| `AccessedResources` | Array of grounding resources Copilot read (files, sites, mails).                                                 |
 
 ## Prerequisites
 
