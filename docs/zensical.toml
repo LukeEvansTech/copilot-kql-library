@@ -5,7 +5,7 @@
 site_name = "copilot-kql-library"
 site_description = "Curated KQL queries for auditing, hunting, and reporting on Microsoft 365 Copilot"
 site_author = "Luke Evans"
-site_url = "https://LukeEvansTech.github.io/copilot-kql-library/"
+site_url = "https://lukeevanstech.github.io/copilot-kql-library/"
 copyright = "Copyright © 2026 Luke Evans"
 
 docs_dir = "docs"
