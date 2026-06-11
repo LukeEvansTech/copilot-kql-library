@@ -13,13 +13,13 @@ This query flags users whose interaction count today exceeds a tunable spike fac
 
 ## Data source
 
-Microsoft Defender XDR Advanced Hunting — `CloudAppEvents` with `Application == "Microsoft 365 Copilot"`. The same query works in Microsoft Sentinel against `CloudAppEvents` from the M365 Defender connector.
+Microsoft Defender XDR Advanced Hunting - `CloudAppEvents` with `Application == "Microsoft 365 Copilot"`. The same query works in Microsoft Sentinel against `CloudAppEvents` from the M365 Defender connector.
 
 ## Tuning parameters
 
-- `lookback` — baseline window (default 30 days).
-- `TodayInteractions > 50` — minimum absolute volume so quiet users don't trigger.
-- `SpikeFactor > 5` — multiple over baseline. Raise for noisy estates.
+- `lookback` - baseline window (default 30 days).
+- `TodayInteractions > 50` - minimum absolute volume so quiet users don't trigger.
+- `SpikeFactor > 5` - multiple over baseline. Raise for noisy estates.
 
 ## Caveats
 
