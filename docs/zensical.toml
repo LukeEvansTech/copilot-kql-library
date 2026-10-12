@@ -45,27 +45,20 @@ repo_url = "https://github.com/LukeEvansTech/copilot-kql-library/"
 repo_name = "LukeEvansTech/copilot-kql-library"
 edit_uri = "edit/main/docs/docs"
 
-[[nav]]
+[[project.nav]]
 Home = "index.md"
 
-[[nav]]
+[[project.nav]]
 "Audit queries" = [
   { "Copilot prompts and responses" = "audit/copilot-prompts-and-responses.md" }
 ]
 
-[[nav]]
+[[project.nav]]
 "Hunting queries" = [
   { "High-frequency Copilot users" = "hunting/high-frequency-copilot-users.md" }
 ]
 
-[[nav]]
+[[project.nav]]
 "Grounding queries" = [
   { "Copilot accessed files" = "grounding/copilot-accessed-files.md" }
 ]
-
-[markdown_extensions]
-admonition = {}
-toc = { permalink = true }
-
-[markdown_extensions.pymdownx.superfences]
-custom_fences = [{ name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" }]
